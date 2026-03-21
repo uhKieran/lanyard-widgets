@@ -4,15 +4,32 @@ export interface CreditLink {
   description: string;
 }
 
-export const creditLinks: CreditLink[] = [
-  {
-    name: "Lanyard",
-    url: "https://discord.gg/UrXF2cfJ7F",
-    description: "Real-time Discord presence API powering all widget data.",
-  },
-  {
-    name: "Fontshare",
-    url: "https://www.fontshare.com",
-    description: "Free, high-quality fonts served via a clean CDN API.",
-  },
-];
+export const getCreditLinks = (lang: "en" | "es"): CreditLink[] => {
+  if (lang === "es") {
+    return [
+      {
+        name: "Lanyard",
+        url: "https://discord.gg/UrXF2cfJ7F",
+        description: "La API de presencia de Discord en tiempo real que impulsa todos los datos de los widgets.",
+      },
+      {
+        name: "Fontshare",
+        url: "https://www.fontshare.com",
+        description: "Fuentes gratuitas de alta calidad servidas a través de una API de CDN limpia.",
+      },
+    ];
+  }
+
+  return [
+    {
+      name: "Lanyard",
+      url: "https://discord.gg/UrXF2cfJ7F",
+      description: "Real-time Discord presence API powering all widget data.",
+    },
+    {
+      name: "Fontshare",
+      url: "https://www.fontshare.com",
+      description: "Free, high-quality fonts served via a clean CDN API.",
+    },
+  ];
+};

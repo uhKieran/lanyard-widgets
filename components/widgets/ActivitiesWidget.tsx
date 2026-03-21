@@ -41,14 +41,17 @@ export default function ActivitiesWidget() {
 
   const [activity, setActivity] = useState<Activity | null>(null);
   const [elapsed, setElapsed] = useState("");
+  const [isOffline, setIsOffline] = useState(false);
   const { isVisible, isExiting, showWidget, hideWidget } = useWidgetVisibility();
 
-  useLanyardSocket(userId, (d) => {
+  useLanyardSocket(userId, (d, offlineMode) => {
+    setIsOffline(offlineMode);
     const payload = d as { activities?: Activity[] };
     const acts: Activity[] = payload?.activities ?? [];
     const act = acts.find((a) => a.type === 0) ?? null;
     if (!act) {
-      hideWidget();
+      if (!offlineMode) hideWidget();
+      else showWidget();
       setActivity(null);
       setElapsed("");
       return;
@@ -153,10 +156,10 @@ export default function ActivitiesWidget() {
           </div>
 
           <div className="info">
-            <div className="label">Playing</div>
-            <div className="song-name">{activity?.name ?? ""}</div>
-            <div className="artist-album">{activity?.details ?? activity?.state ?? ""}</div>
-            {elapsed && (
+            <div className="label">{isOffline ? "Disconnected" : "Playing"}</div>
+            <div className="song-name">{isOffline ? "Offline" : (activity?.name ?? "")}</div>
+            <div className="artist-album">{isOffline ? "Lanyard connection lost" : (activity?.details ?? activity?.state ?? "")}</div>
+            {!isOffline && elapsed && (
               <div className="progress-wrap">
                 <div className="timestamps">
                   <span>for {elapsed}</span>
