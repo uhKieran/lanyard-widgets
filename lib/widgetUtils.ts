@@ -21,6 +21,8 @@ export function buildWidgetOverrideCss(
   bgHex?: string,
   textHex?: string,
   hideIcon?: boolean,
+  width?: number,
+  height?: number,
 ): string {
   const rules: string[] = [];
 
@@ -34,6 +36,12 @@ export function buildWidgetOverrideCss(
   }
   if (hideIcon) {
     rules.push(`.bg-logo { display: none; }`);
+  }
+  if (width) {
+    rules.push(`.card { width: ${width}px !important; }`);
+  }
+  if (height) {
+    rules.push(`.card { height: ${height}px !important; overflow: hidden; }`);
   }
 
   return rules.join("\n");

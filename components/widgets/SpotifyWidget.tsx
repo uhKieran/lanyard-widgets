@@ -28,6 +28,8 @@ export default function SpotifyWidget() {
   const shouldHideIcon = query.noicon === "1";
   const widgetStyle = (query.style as string | undefined) ?? "default";
   const shouldHideBar = query.nobar === "1";
+  const widthParam = query.width ? parseInt(query.width as string, 10) : undefined;
+  const heightParam = query.height ? parseInt(query.height as string, 10) : undefined;
 
   const [spotifyData, setSpotifyData] = useState<SpotifyData | null>(null);
   const [progress, setProgress] = useState(0);
@@ -135,7 +137,7 @@ export default function SpotifyWidget() {
     .filter(Boolean)
     .join(" ");
 
-  const overrideCss = buildWidgetOverrideCss(bgHex, textHex, shouldHideIcon);
+  const overrideCss = buildWidgetOverrideCss(bgHex, textHex, shouldHideIcon, widthParam, heightParam);
 
   return (
     <>

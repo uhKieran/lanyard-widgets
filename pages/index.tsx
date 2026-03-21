@@ -31,6 +31,8 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
   const [bgColor, setBgColor] = useState("");
   const [textColor, setTextColor] = useState("");
   const [hideIcon, setHideIcon] = useState(false);
+  const [widgetWidth, setWidgetWidth] = useState("");
+  const [widgetHeight, setWidgetHeight] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -65,6 +67,8 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
     if (bgColor.length === 6) params.set("bg", bgColor);
     if (textColor.length === 6) params.set("color", textColor);
     if (hideIcon) params.set("noicon", "1");
+    if (widgetWidth && parseInt(widgetWidth) > 0) params.set("width", widgetWidth);
+    if (widgetHeight && parseInt(widgetHeight) > 0) params.set("height", widgetHeight);
 
     return `${baseUrl}/${activeType}/${submittedId}?${params}`;
   })();
@@ -375,6 +379,31 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
                   >
                     {hideIcon ? "Hidden" : "Visible"}
                   </button>
+                </div>
+              </div>
+
+              <div className="settings-row">
+                <div className="settings-group">
+                  <div className="settings-label">Width (px)</div>
+                  <input
+                    type="number"
+                    className="dimension-input"
+                    placeholder="auto"
+                    min={1}
+                    value={widgetWidth}
+                    onChange={(e) => setWidgetWidth(e.target.value)}
+                  />
+                </div>
+                <div className="settings-group">
+                  <div className="settings-label">Height (px)</div>
+                  <input
+                    type="number"
+                    className="dimension-input"
+                    placeholder="auto"
+                    min={1}
+                    value={widgetHeight}
+                    onChange={(e) => setWidgetHeight(e.target.value)}
+                  />
                 </div>
               </div>
             </div>

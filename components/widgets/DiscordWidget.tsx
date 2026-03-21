@@ -43,6 +43,8 @@ export default function DiscordWidget() {
   const textHex = query.color as string | undefined;
   const shouldHideIcon = query.noicon === "1";
   const widgetStyle = (query.style as string | undefined) ?? "default";
+  const widthParam = query.width ? parseInt(query.width as string, 10) : undefined;
+  const heightParam = query.height ? parseInt(query.height as string, 10) : undefined;
 
   const [data, setData] = useState<LanyardData | null>(null);
   const { isVisible, isExiting, showWidget, hideWidget } = useWidgetVisibility();
@@ -85,7 +87,7 @@ export default function DiscordWidget() {
     .filter(Boolean)
     .join(" ");
 
-  const overrideCss = buildWidgetOverrideCss(bgHex, textHex, shouldHideIcon);
+  const overrideCss = buildWidgetOverrideCss(bgHex, textHex, shouldHideIcon, widthParam, heightParam);
 
   return (
     <>

@@ -342,6 +342,32 @@ body {
   flex-wrap: wrap;
 }
 
+.dimension-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  color: #fafafa;
+  font-size: 0.875rem;
+  padding: 0.4rem 0.625rem;
+  outline: none;
+  width: 90px;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+.dimension-input:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dimension-input::placeholder {
+  color: #52525b;
+}
+
+.dimension-input::-webkit-inner-spin-button,
+.dimension-input::-webkit-outer-spin-button {
+  opacity: 0.4;
+}
+
 .settings-group {
   flex: 0 0 auto;
 }
