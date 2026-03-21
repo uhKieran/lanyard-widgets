@@ -175,7 +175,7 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
           </p>
           <div className="hero-actions">
             <a
-              href="https://github.com/uhKieran/lanyard"
+              href="https://github.com/uhKieran/lanyard-widgets"
               target="_blank"
               rel="noopener noreferrer"
               className="github-btn"
@@ -437,7 +437,7 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
 
 export const getStaticProps: GetStaticProps<{ contributors: Contributor[] }> = async () => {
   try {
-    const res = await fetch("https://api.github.com/repos/uhKieran/lanyard/contributors", {
+    const res = await fetch("https://api.github.com/repos/uhKieran/lanyard-widgets/contributors", {
       headers: { Accept: "application/vnd.github+json" },
     });
     const contributors: Contributor[] = res.ok ? await res.json() : [];
