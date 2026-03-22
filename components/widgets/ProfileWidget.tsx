@@ -23,7 +23,7 @@ interface Activity {
 }
 
 interface LanyardData {
-  discord_user: { id: string; username: string; global_name?: string; avatar?: string };
+  discord_user: { id: string; username: string; global_name?: string; avatar?: string; banner?: string };
   discord_status: string;
   activities: Activity[];
 }
@@ -36,6 +36,7 @@ export default function ProfileWidget() {
   const bgHex = query.bg as string | undefined;
   const textHex = query.color as string | undefined;
   const shouldHideIcon = query.noicon === "1";
+  const useDiscordBanner = query.discordbanner === "1";
   const widthParam = query.width ? parseInt(query.width as string, 10) : undefined;
   const heightParam = query.height ? parseInt(query.height as string, 10) : undefined;
 
@@ -63,6 +64,14 @@ export default function ProfileWidget() {
   const avatarUrl = user?.avatar
     ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
     : null;
+  const discordBannerUrl = useDiscordBanner && user?.id
+    ? `https://dcdn.dstn.to/banners/${user.id}`
+    : null;
+  const bannerBackground = discordBannerUrl
+    ? `url(${discordBannerUrl}) center/cover no-repeat`
+    : avatarUrl
+    ? `url(${avatarUrl}) center/cover no-repeat`
+    : "#5865F2";
 
   const customStatus = data?.activities.find((a) => a.type === 4);
   const currentActivity = data?.activities.find((a) => a.type === 0);
@@ -94,7 +103,7 @@ export default function ProfileWidget() {
         className={cardClass}
         style={{ display: !isVisible && !isExiting ? "none" : undefined }}
       >
-        <div className="profile-banner" style={{ background: avatarUrl ? `url(${avatarUrl}) center/cover no-repeat` : "#5865F2" }} />
+        <div className="profile-banner" style={{ background: bannerBackground }} />
         <div className="profile-banner-overlay" />
         <div className="card-inner profile-inner">
           <svg className="bg-logo" viewBox="0 0 24 24" fill="currentColor">

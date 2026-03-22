@@ -23,6 +23,7 @@ const translations = {
     widthLabel: "Width (px)",
     heightLabel: "Height (px)",
     watermarkLabel: "Watermark",
+    discordBannerLabel: "Discord Banner",
     bgLabel: "Background",
     textLabel: "Text",
     colorPresets: "Color Presets",
@@ -54,6 +55,7 @@ const translations = {
     widthLabel: "Ancho (px)",
     heightLabel: "Alto (px)",
     watermarkLabel: "Marca de agua",
+    discordBannerLabel: "Banner de Discord",
     bgLabel: "Fondo",
     textLabel: "Texto",
     colorPresets: "Colores Prediseñados",
@@ -104,6 +106,7 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
   const [bgColor, setBgColor] = useState("");
   const [textColor, setTextColor] = useState("");
   const [hideIcon, setHideIcon] = useState(false);
+  const [useDiscordBanner, setUseDiscordBanner] = useState(false);
   const [widgetWidth, setWidgetWidth] = useState("");
   const [widgetHeight, setWidgetHeight] = useState("");
   const [isCopied, setIsCopied] = useState(false);
@@ -179,6 +182,7 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
     if (bgColor.length === 6) params.set("bg", bgColor);
     if (textColor.length === 6) params.set("color", textColor);
     if (hideIcon) params.set("noicon", "1");
+    if (activeType === "profile" && useDiscordBanner) params.set("discordbanner", "1");
     if (widgetWidth && parseInt(widgetWidth) > 0) params.set("width", widgetWidth);
     if (widgetHeight && parseInt(widgetHeight) > 0) params.set("height", widgetHeight);
 
@@ -438,25 +442,27 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
             </p>
 
             <div className="settings-panel">
-              <div>
-                <div className="settings-label" title="Select widget presentation style">{t.styleLabel}</div>
-                <div className="pill-row">
-                  {styleOptions.map((styleOption) => (
-                    <button
-                      key={styleOption.key}
-                      className={`pill-btn${widgetStyles[activeType] === styleOption.key ? " pill-btn--active" : ""}`}
-                      onClick={() =>
-                        setWidgetStyles((prev) => ({
-                          ...prev,
-                          [activeType]: styleOption.key,
-                        }))
-                      }
-                    >
-                      {styleOption.label}
-                    </button>
-                  ))}
+              {activeType !== "profile" && (
+                <div>
+                  <div className="settings-label" title="Select widget presentation style">{t.styleLabel}</div>
+                  <div className="pill-row">
+                    {styleOptions.map((styleOption) => (
+                      <button
+                        key={styleOption.key}
+                        className={`pill-btn${widgetStyles[activeType] === styleOption.key ? " pill-btn--active" : ""}`}
+                        onClick={() =>
+                          setWidgetStyles((prev) => ({
+                            ...prev,
+                            [activeType]: styleOption.key,
+                          }))
+                        }
+                      >
+                        {styleOption.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="settings-row">
                 <div className="settings-group">
@@ -527,6 +533,19 @@ export default function Home({ contributors = [] }: { contributors: Contributor[
                     {hideIcon ? t.hidden : t.visible}
                   </button>
                 </div>
+
+                {activeType === "profile" && (
+                  <div className="settings-group">
+                    <div className="settings-label" title="Use your Discord banner image">{t.discordBannerLabel}</div>
+                    <button
+                      className={`toggle-btn${useDiscordBanner ? " toggle-btn--on" : ""}`}
+                      onClick={() => setUseDiscordBanner((prev) => !prev)}
+                    >
+                      <span className={`toggle-dot${useDiscordBanner ? " toggle-dot--on" : ""}`} />
+                      {useDiscordBanner ? t.on : t.off}
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="settings-row">

@@ -17,6 +17,11 @@ export const getCreditLinks = (lang: "en" | "es"): CreditLink[] => {
         url: "https://www.fontshare.com",
         description: "Fuentes gratuitas de alta calidad servidas a través de una API de CDN limpia.",
       },
+      {
+        name: "dcdn.dstn.to",
+        url: "https://dcdn.dstn.to",
+        description: "Una API de CDN de Discord utilizada para obtener banners",
+      },
     ];
   }
 
@@ -31,5 +36,10 @@ export const getCreditLinks = (lang: "en" | "es"): CreditLink[] => {
       url: "https://www.fontshare.com",
       description: "Free, high-quality fonts served via a clean CDN API.",
     },
-  ];
+    {
+      name: "dcdn.dstn.to",
+      url: "https://dcdn.dstn.to",
+      description: "A Discord CDN API used for fetching banners",
+    },
+  ];  
 };

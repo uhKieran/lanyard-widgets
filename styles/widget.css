@@ -223,6 +223,12 @@ body.dark .bg-logo {
   padding: 1.25rem;
 }
 
+.card.style-elaborate {
+  max-width: 22rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .card.style-elaborate .album-art {
   width: 100% !important;
   height: auto !important;
@@ -473,6 +479,7 @@ body.dark .profile-banner {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: visible;
 }
 
 .profile-avatar-wrap {
