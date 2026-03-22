@@ -5,11 +5,13 @@ import { useRouter } from "next/router";
 const SpotifyWidget = dynamic(() => import("@/components/widgets/SpotifyWidget"), { ssr: false });
 const DiscordWidget = dynamic(() => import("@/components/widgets/DiscordWidget"), { ssr: false });
 const ActivitiesWidget = dynamic(() => import("@/components/widgets/ActivitiesWidget"), { ssr: false });
+const ProfileWidget = dynamic(() => import("@/components/widgets/ProfileWidget"), { ssr: false });
 
 const widgetMap: Record<string, React.ComponentType> = {
   spotify: SpotifyWidget,
   discord: DiscordWidget,
   activities: ActivitiesWidget,
+  profile: ProfileWidget,
 };
 
 export default function WidgetDispatcherPage() {

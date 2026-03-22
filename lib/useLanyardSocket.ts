@@ -10,7 +10,7 @@ const reconnectDelayMs = 3000;
 
 export function useLanyardSocket(
   userId: string | undefined,
-  onPresenceUpdate: (data: Record<string, unknown>) => void,
+  onPresenceUpdate: (data: Record<string, unknown> | null, isOffline: boolean) => void,
 ) {
   const socketRef = useRef<WebSocket | null>(null);
   const heartbeatTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -39,7 +39,7 @@ export function useLanyardSocket(
       }
 
       if (message.op === 0) {
-        callbackRef.current(message.d);
+        callbackRef.current(message.d, false);
       }
     };
 
@@ -47,6 +47,7 @@ export function useLanyardSocket(
       if (heartbeatTimerRef.current) {
         clearInterval(heartbeatTimerRef.current);
       }
+      callbackRef.current(null, true);
       setTimeout(connect, reconnectDelayMs);
     };
   }, [userId]);

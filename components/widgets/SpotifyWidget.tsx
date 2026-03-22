@@ -37,6 +37,7 @@ export default function SpotifyWidget() {
   const [totalMs, setTotalMs] = useState(0);
   const [lyrics, setLyrics] = useState<LrcLine[]>([]);
   const [activeLineIndex, setActiveLineIndex] = useState(-1);
+  const [isOffline, setIsOffline] = useState(false);
 
   const { isVisible, isExiting, showWidget, hideWidget } = useWidgetVisibility();
 
@@ -57,7 +58,8 @@ export default function SpotifyWidget() {
     animFrameRef.current = requestAnimationFrame(tick);
   }, []);
 
-  useLanyardSocket(userId, (presenceData) => {
+  useLanyardSocket(userId, (presenceData, offlineMode) => {
+    setIsOffline(offlineMode);
     const rawSpotify = (presenceData as Record<string, unknown>)?.spotify as
       | Record<string, unknown>
       | undefined;
@@ -73,7 +75,8 @@ export default function SpotifyWidget() {
       setSpotifyData(mapped);
       showWidget();
     } else {
-      hideWidget();
+      if (!offlineMode) hideWidget();
+      else showWidget();
       setSpotifyData(null);
     }
   });
@@ -174,11 +177,11 @@ export default function SpotifyWidget() {
           </div>
 
           <div className="info">
-            <div className="song-name">{spotifyData?.song ?? ""}</div>
+            <div className="song-name">{isOffline ? "Offline" : (spotifyData?.song ?? "")}</div>
             <div className="artist-album">
-              {spotifyData ? `${spotifyData.artist} \u2013 ${spotifyData.album}` : ""}
+              {isOffline ? "Lanyard connection lost" : (spotifyData ? `${spotifyData.artist} \u2013 ${spotifyData.album}` : "")}
             </div>
-            {!shouldHideBar && (
+            {!shouldHideBar && !isOffline && (
               <div className="progress-wrap">
                 <div className="progress-bg">
                   <div className="progress-fill" style={{ width: `${progress}%` }} />

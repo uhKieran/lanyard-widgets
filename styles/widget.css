@@ -216,6 +216,42 @@ body.dark .bg-logo {
   height: 5rem;
 }
 
+.card.style-elaborate .card-inner {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.card.style-elaborate .album-art {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.75rem !important;
+}
+
+.card.style-elaborate .info {
+  text-align: center;
+}
+
+.card.style-stream .card-inner {
+  padding: 0.375rem 0.75rem;
+  gap: 0;
+  min-height: 0;
+}
+
+.card.style-stream .album-art,
+.card.style-stream .bg-logo,
+.card.style-stream .progress-wrap,
+.card.style-stream .artist-album {
+  display: none !important;
+}
+
+.card.style-stream .song-name {
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
 /* ── Spotify ── */
 
 .widget-spotify .bg-logo {
@@ -409,4 +445,158 @@ body.dark .status-dot {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ── Profile ── */
+
+.widget-profile .bg-logo {
+  color: #18181b;
+  opacity: 0.05;
+}
+
+.profile-banner {
+  width: 100%;
+  height: 4.5rem;
+  border-bottom: 2px solid #f4f4f5;
+}
+
+body.dark .profile-banner {
+  border-bottom-color: #27272a;
+}
+
+.card.style-blurred .profile-banner {
+  border-bottom-color: transparent !important;
+}
+
+.profile-inner {
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-avatar-wrap {
+  position: relative;
+  margin-top: -2.5rem;
+  margin-bottom: 0.5rem;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+body.dark .profile-avatar-wrap {
+  background: #18181b;
+}
+
+.card.style-blurred .profile-avatar-wrap {
+  background: transparent !important;
+  padding: 0 !important;
+  margin-top: -2.2rem !important;
+}
+
+.profile-avatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-status-dot {
+  width: 1.125rem;
+  height: 1.125rem;
+  bottom: 0.25rem;
+  right: 0.25rem;
+  border-width: 3px;
+}
+
+.profile-info {
+  text-align: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.profile-name {
+  color: #18181b;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+body.dark .profile-name {
+  color: #f4f4f5;
+}
+
+.profile-username {
+  color: #71717a;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+body.dark .profile-username {
+  color: #a1a1aa;
+}
+
+.profile-custom-status {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: #f4f4f5;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  color: #3f3f46;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+body.dark .profile-custom-status {
+  background: #27272a;
+  color: #e4e4e7;
+}
+
+.card.style-blurred .profile-custom-status {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.profile-current-activity {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.activity-label {
+  color: #1DB954;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.activity-details {
+  color: #52525b;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-top: 0.125rem;
+}
+
+body.dark .activity-details {
+  color: #a1a1aa;
+}
+
+.card.style-blurred .activity-details {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.card.style-compact .profile-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.card.style-compact .profile-avatar-wrap {
+  margin-top: -1.75rem;
 }
