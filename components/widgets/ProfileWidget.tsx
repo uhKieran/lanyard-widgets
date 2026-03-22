@@ -64,14 +64,15 @@ export default function ProfileWidget() {
   const avatarUrl = user?.avatar
     ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`
     : null;
-  const discordBannerUrl = useDiscordBanner && user?.id
+  const discordBannerUrl = useDiscordBanner && user?.id && user?.banner
     ? `https://dcdn.dstn.to/banners/${user.id}`
     : null;
+  const baseBannerColor = "#5865F2";
   const bannerBackground = discordBannerUrl
-    ? `url(${discordBannerUrl}) center/cover no-repeat`
+    ? `${baseBannerColor} url(${discordBannerUrl}) center/cover no-repeat`
     : avatarUrl
-    ? `url(${avatarUrl}) center/cover no-repeat`
-    : "#5865F2";
+    ? `${baseBannerColor} url(${avatarUrl}) center/cover no-repeat`
+    : baseBannerColor;
 
   const customStatus = data?.activities.find((a) => a.type === 4);
   const currentActivity = data?.activities.find((a) => a.type === 0);

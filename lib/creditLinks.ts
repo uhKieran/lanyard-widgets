@@ -20,7 +20,7 @@ export const getCreditLinks = (lang: "en" | "es"): CreditLink[] => {
       {
         name: "dcdn.dstn.to",
         url: "https://dcdn.dstn.to",
-        description: "Una API de CDN de Discord utilizada para obtener banners",
+        description: "Una API de CDN de Discord utilizada para obtener banners.",
       },
     ];
   }
@@ -39,7 +39,7 @@ export const getCreditLinks = (lang: "en" | "es"): CreditLink[] => {
     {
       name: "dcdn.dstn.to",
       url: "https://dcdn.dstn.to",
-      description: "A Discord CDN API used for fetching banners",
+      description: "A Discord CDN API used for fetching banners.",
     },
-  ];  
+  ];
 };
