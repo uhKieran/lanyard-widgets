@@ -38,7 +38,7 @@ export function buildWidgetOverrideCss(
     rules.push(`.bg-logo { display: none; }`);
   }
   if (width) {
-    rules.push(`.card { width: ${width}px !important; }`);
+    rules.push(`.card { width: ${width}px !important; max-width: none !important; }`);
   }
   if (height) {
     rules.push(`.card { height: ${height}px !important; overflow: hidden; }`);
